@@ -1,0 +1,39 @@
+#include<stdio.h>
+
+int p[15],w[15],dp[15][105];
+
+int max(int a,int b){
+    return a>b?a:b;
+}
+
+int main(){
+    int n,m,i,j;
+    printf("Enter number of objects: ");
+    scanf("%d",&n);
+    printf("Enter knapsack capacity: ");
+    scanf("%d",&m);
+    printf("Enter profit and weight:\n");
+
+    for(i=1;i<=n;i++)
+        scanf("%d%d",&p[i],&w[i]);
+
+    for(i=1;i<=n;i++)
+        for(j=0;j<=m;j++)
+            if(w[i]<=j)
+                dp[i][j]=max(dp[i-1][j],dp[i-1][j-w[i]]+p[i]);
+            else
+                dp[i][j]=dp[i-1][j];
+
+    printf("Max profit=%d",dp[n][m]);
+    return 0;
+}
+
+Output :
+Enter number of objects: 4
+Enter knapsack capacity: 7
+Enter profit and weight:
+1 1
+4 3
+5 4
+7 5
+Max profit=9

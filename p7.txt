@@ -1,0 +1,60 @@
+#include<stdio.h>
+
+int main()
+{
+    int n,w[20],p[20],i,j,m;
+    float x[20]={0},r[20],profit=0;
+
+    printf("Enter number of objects: ");
+    scanf("%d",&n);
+
+    printf("Enter weights: ");
+    for(i=0;i<n;i++) scanf("%d",&w[i]);
+
+    printf("Enter profits: ");
+    for(i=0;i<n;i++) scanf("%d",&p[i]);
+
+    printf("Enter capacity: ");
+    scanf("%d",&m);
+
+    for(i=0;i<n;i++) r[i]=(float)p[i]/w[i];
+
+    for(i=0;i<n-1;i++)
+        for(j=i+1;j<n;j++)
+            if(r[i]<r[j])
+            {
+                float t=r[i]; r[i]=r[j]; r[j]=t;
+                int a=w[i]; w[i]=w[j]; w[j]=a;
+                a=p[i]; p[i]=p[j]; p[j]=a;
+            }
+
+    for(i=0;i<n;i++)
+    {
+        if(w[i]<=m)
+        {
+            x[i]=1;
+            profit+=p[i];
+            m-=w[i];
+        }
+        else
+        {
+            x[i]=(float)m/w[i];
+            profit+=x[i]*p[i];
+            break;
+        }
+    }
+
+    printf("Maximum Profit = %.1f\n",profit);
+    printf("Solution Vector: ");
+    for(i=0;i<n;i++) printf("%.1f ",x[i]);
+
+    return 0;
+}
+
+Output : 
+Enter number of objects: 3
+Enter weights: 10 20 30
+Enter profits: 60 100 120
+Enter capacity: 50
+Maximum Profit = 240.0
+Solution Vector: 1.0 1.0 0.7

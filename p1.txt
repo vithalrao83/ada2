@@ -1,0 +1,65 @@
+#include<stdio.h>
+#define INF 999
+
+int p[10],c[10][10];
+
+int find(int x)
+{
+    while(p[x]) x=p[x];
+    return x;
+}
+
+int main()
+{
+    int n,i,j,k,u,v,min,a,b,cost=0;
+    printf("Enter number of vertices: ");
+    scanf("%d",&n);
+
+    printf("Enter cost matrix:\n");
+    for(i=1;i<=n;i++)
+        for(j=1;j<=n;j++)
+            scanf("%d",&c[i][j]);
+
+    printf("\nEdges in MST:\n");
+    for(k=1;k<n;k++)
+    {
+        min=INF;
+        for(i=1;i<=n;i++)
+            for(j=1;j<=n;j++)
+                if(c[i][j]<min)
+                {
+                    min=c[i][j];
+                    a=u=i;
+                    b=v=j;
+                }
+
+        u=find(u);
+        v=find(v);
+
+        if(u!=v)
+        {
+            p[v]=u;
+            printf("%d -> %d = %d\n",a,b,min);
+            cost+=min;
+        }
+        c[a][b]=c[b][a]=INF;
+    }
+
+    printf("Minimum Cost = %d",cost);
+    return 0;
+}
+
+Output : 
+
+Enter number of vertices: 4
+Enter cost matrix:
+999 10 6 5
+10 999 999 15
+6 999 999 4
+5 15 4 999
+
+Edges in MST:
+3 -> 4 = 4
+1 -> 4 = 5
+1 -> 2 = 10
+Minimum Cost = 19

@@ -1,0 +1,47 @@
+#include<stdio.h>
+#define INF 999
+
+int main()
+{
+    int a[10][10],n,i,j,k;
+
+    printf("Enter number of vertices: ");
+    scanf("%d",&n);
+
+    printf("Enter cost matrix:\n");
+    for(i=0;i<n;i++)
+        for(j=0;j<n;j++)
+            scanf("%d",&a[i][j]);
+
+    for(k=0;k<n;k++)
+        for(i=0;i<n;i++)
+            for(j=0;j<n;j++)
+                if(a[i][k]+a[k][j]<a[i][j])
+                    a[i][j]=a[i][k]+a[k][j];
+
+    printf("Shortest path matrix:\n");
+    for(i=0;i<n;i++)
+    {
+        for(j=0;j<n;j++)
+            printf("%d ",a[i][j]);
+        printf("\n");
+    }
+
+    return 0;
+}
+
+
+Output : 
+Enter number of vertices: 4
+
+Enter cost matrix:
+0 5 999 10
+999 0 3 999
+999 999 0 1
+999 999 999 0
+
+Shortest path matrix:
+0 5 8 9
+999 0 3 4
+999 999 0 1
+999 999 999 0

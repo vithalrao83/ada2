@@ -1,0 +1,47 @@
+#include<stdio.h>
+int s[20],x[20],n,d;
+
+void sub(int sum,int k)
+{
+    if(sum==d)
+    {
+        for(int i=0;i<n;i++)
+            if(x[i]) printf("%d ",s[i]);
+        printf("\n");
+        return;
+    }
+    if(k==n||sum>d) return;
+
+    x[k]=1;
+    sub(sum+s[k],k+1);
+    x[k]=0;
+    sub(sum,k+1);
+}
+
+int main()
+{
+    printf("Enter n: ");
+    scanf("%d",&n);
+
+    printf("Enter elements: ");
+    for(int i=0;i<n;i++) scanf("%d",&s[i]);
+
+    printf("Enter required sum: ");
+    scanf("%d",&d);
+
+    printf("Subsets are:\n");
+    sub(0,0);
+
+    return 0;
+}
+
+
+Output : 
+
+Enter n: 5
+Enter elements: 1 2 3 4 5
+Enter required sum: 5
+Subsets are:
+1 4
+2 3
+5
