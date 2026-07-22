@@ -1,4 +1,5 @@
 #include<stdio.h>
+#include<conio.h>
 
 int p[15],w[15],dp[15][105];
 
@@ -8,6 +9,7 @@ int max(int a,int b){
 
 int main(){
     int n,m,i,j;
+    clrscr();
     printf("Enter number of objects: ");
     scanf("%d",&n);
     printf("Enter knapsack capacity: ");
@@ -25,6 +27,7 @@ int main(){
                 dp[i][j]=dp[i-1][j];
 
     printf("Max profit=%d",dp[n][m]);
+    getch();
     return 0;
 }
 
